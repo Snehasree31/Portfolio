@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300&display=swap" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <title>Guess the Number Game</title>
+  
+    <style>
+    html {
+        
+        font-family: 'Assistant', sans-serif;
+    }
+      
+    body 
+    {
+    background-image: url("Guess.png");
+    background-position: center;
+    background-size: contain;
+    position: relative;
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    }
+    </style>
+    <script type="text/javascript">
+        function createCookie(cookieName,cookieValue,daysToExpire)
+        {
+          var date = new Date();
+          date.setTime(date.getTime()+(daysToExpire*24*60*60*1000));
+          document.cookie = cookieName + "=" + cookieValue + "; expires=" + date.toGMTString();
+        }
+        function accessCookie(cookieName)
+        {
+          var name = cookieName + "=";
+          var allCookieArray = document.cookie.split(';');
+          for(var i=0; i<allCookieArray.length; i++)
+          {
+            var temp = allCookieArray[i].trim();
+            if (temp.indexOf(name)==0)
+            return temp.substring(name.length,temp.length);
+             }
+            return "";
+        }
+        function checkCookie()
+        {
+          var user = accessCookie("username");
+          if (user!="")
+            alert("Welcome Back " + user + "!!!");
+          else
+          {
+            user = prompt("Please Enter your Name");
+            num = prompt("How many days you want to store your name on your computer?");
+            if (user!="" && user!=null)
+            {
+            createCookie("username", user, num);
+            }
+          }
+        }
+    </script>
+</head>
+  
+<body onload="checkCookie()">
+    
+<h1><b><strong>Guess The Number</strong></b></h1>
+  
+<p><b>We have selected a random number from 1 - 20. <br>Try to guess it</b></p><br>
+  
+<div class="form">
+    <label for="guessField"><b>Enter a guess: </b></label>
+    <input type = "text" id = "guessField" class = "guessField" ><br><br><br><br>
+    <input type="Reset" style="margin-left: 20px;" value="Reset" onclick="alert('The Inputed Number will be Erased !!');location.reload();"></input>
+    <input type = "submit" style="margin-left: 300px;" value = "Submit Guess" class = "guessSubmit" id = "submitguess">
+    
+</div>
+  
+<script type = "text/javascript">
+  var y = Math.floor(Math.random() * 20 + 1);
+  var guess = 1;
+  document.getElementById("submitguess").onclick = function(){
+  var x = document.getElementById("guessField").value;
+  if(x == y)
+   {    
+       alert("CONGRATULATIONS!!! YOU GUESSED IT RIGHT IN "+ guess + " GUESS ");
+   }
+   else if(x > y) 
+   {    
+       guess++;
+       alert("OOPS SORRY!! TRY A SMALLER NUMBER");
+   }
+   else
+   {
+       guess++;
+       alert("OOPS SORRY!! TRY A GREATER NUMBER")
+   }
+}
+</script>
+
+</body>
+</html>
